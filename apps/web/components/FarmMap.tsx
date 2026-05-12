@@ -90,7 +90,8 @@ export default function FarmMap({ farms, selectedId, selectedFarm, onSelect, onB
         const b = map.getBounds()
         onBoundsChange({ north: b.getNorth(), south: b.getSouth(), east: b.getEast(), west: b.getWest() })
       }
-      map.on('movestart', () => { userInteractedRef.current = true })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      map.on('movestart', (e: any) => { if (e.originalEvent) userInteractedRef.current = true })
       map.on('moveend', emitBounds)
       map.on('zoomend', emitBounds)
 
